@@ -4,18 +4,31 @@ class Program
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine("Hello World");
 
-        var sumExpressionTree = CreateExpressionTreeUsingExpressionTreeClass();
-        Console.WriteLine(sumExpressionTree.NodeType); // prints "Lambda"
-        Console.WriteLine(sumExpressionTree.Parameters[0].Name); // prints "number1"
-        Console.WriteLine(sumExpressionTree.Parameters[1].Name); // prints "number2"
-        Console.WriteLine(sumExpressionTree.Body.ToString()); // prints "(number1 + number2)"
-        Console.WriteLine(sumExpressionTree.ReturnType); // prints "System.Int32"
+        ThreadPractice();
+    }
+    private static void ThreadPractice()
+    {
+        Console.WriteLine("Practising Theread");
+        Thread thread = new Thread(CountNumber);
 
-        var compileSumExpressionTree = CompileExpressionTreeToLambdaExpression(sumExpressionTree)(1, 3);
-        Console.WriteLine(compileSumExpressionTree);
+        thread.Start();
 
+        for (int i = 0; i < 100; i++)
+        {
+            Console.WriteLine("Main Thread " + i);
+        }
+        thread.Join();
+
+        Console.WriteLine("Joined");
+
+    }
+    static void CountNumber()
+    {
+        for (int i = 0; i < 100; i++)
+        {
+            Console.WriteLine("Second Thread " + i);
+        }
     }
     public static Expression<Func<int, int, int>> CreateExpressionTreeUsingExpressionTreeClass()
     {
@@ -31,5 +44,19 @@ class Program
         var delegateRepresentingLambdaExpression = expressionTree.Compile();
 
         return delegateRepresentingLambdaExpression;
+    }
+    private void expressionTree()
+    {
+        Console.WriteLine("Hello World");
+
+        var sumExpressionTree = CreateExpressionTreeUsingExpressionTreeClass();
+        Console.WriteLine(sumExpressionTree.NodeType); // prints "Lambda"
+        Console.WriteLine(sumExpressionTree.Parameters[0].Name); // prints "number1"
+        Console.WriteLine(sumExpressionTree.Parameters[1].Name); // prints "number2"
+        Console.WriteLine(sumExpressionTree.Body.ToString()); // prints "(number1 + number2)"
+        Console.WriteLine(sumExpressionTree.ReturnType); // prints "System.Int32"
+
+        var compileSumExpressionTree = CompileExpressionTreeToLambdaExpression(sumExpressionTree)(1, 3);
+        Console.WriteLine(compileSumExpressionTree);
     }
 }
