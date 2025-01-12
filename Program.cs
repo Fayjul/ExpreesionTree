@@ -2,11 +2,44 @@
 
 class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
 
-        ThreadPractice();
+        var final = await TastPracticeAsync();
+        Console.WriteLine("Hello world");
+        Console.WriteLine(final.ToString());
     }
+
+    private static async Task<string> TastPracticeAsync()
+    {
+        Task myTask1 = Task.Run(async () =>
+        {
+            Console.WriteLine("Chef 1 is preparing Dish 1");
+            await Task.Delay(10000); // Chef 1 takes 10 seconds to prepare Dish 1
+            Console.WriteLine("Dish 1 is ready!");
+        });
+
+        Task myTask2 = Task.Run(async () =>
+        {
+            Console.WriteLine("Chef 2 is preparing Dish 2");
+            await Task.Delay(1000); // Chef 2 takes 1 second to prepare Dish 2
+            Console.WriteLine("Dish 2 is ready!");
+        });
+
+        Task myTask3 = Task.Run(async () =>
+        {
+            Console.WriteLine("Chef 3 is preparing Dish 3");
+            await Task.Delay(1000); // Chef 3 takes 1 second to prepare Dish 3
+            Console.WriteLine("Dish 3 is ready!");
+        });
+
+        await Task.WhenAll(myTask1, myTask2, myTask3);
+
+        return "Manager: All dishes are ready! Task completed!";
+
+        //Console.WriteLine("Manager: All dishes are ready! Task completed!");
+    }
+
     private static void ThreadPractice()
     {
         Console.WriteLine("Practising Theread");
@@ -23,7 +56,7 @@ class Program
         Console.WriteLine("Joined");
 
     }
-    static void CountNumber()
+    static async void CountNumber()
     {
         for (int i = 0; i < 100; i++)
         {
