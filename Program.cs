@@ -5,12 +5,27 @@ class Program
     public static async Task Main(string[] args)
     {
 
-        var final = await TastPracticeAsync();
-        Console.WriteLine("Hello world");
-        Console.WriteLine(final.ToString());
+        BindingPractice();
     }
+    public class Animal
+    {
+        public void Speak()
+        {
+            Console.WriteLine("The animal makes a sound.");
+        }
+    }
+    private static void BindingPractice()
+    {
+        Console.WriteLine("Binding Practice start");
+        Animal animal = new Animal();
+        animal.Speak(); // Programe know which method need to execute. 
+        //animal.Speaks(); //This line will give a error during compilation.
 
-    private static async Task<string> TastPracticeAsync()
+        dynamic animal2 = new Animal();
+        animal2.Speaks(); // Don't have compilation error
+
+    }
+    private static async Task<string> TaskPracticeAsync()
     {
         Task myTask1 = Task.Run(async () =>
         {
