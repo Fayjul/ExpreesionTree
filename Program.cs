@@ -2,18 +2,13 @@
 
 class Program
 {
-    public static async Task Main(string[] args)
+    public static void Main(string[] args)
     {
+        Animal animal = new Animal();
+        animal.Speak();
+        animal.Movement();
+    }
 
-        BindingPractice();
-    }
-    public class Animal
-    {
-        public void Speak()
-        {
-            Console.WriteLine("The animal makes a sound.");
-        }
-    }
     private static void BindingPractice()
     {
         Console.WriteLine("Binding Practice start");
@@ -106,5 +101,20 @@ class Program
 
         var compileSumExpressionTree = CompileExpressionTreeToLambdaExpression(sumExpressionTree)(1, 3);
         Console.WriteLine(compileSumExpressionTree);
+    }
+}
+public class Animal
+{
+    public void Speak()
+    {
+        Console.WriteLine("The animal makes a sound.");
+    }
+}
+public static class ExtensionMethod
+{
+
+    public static void Movement(this Animal animal)
+    {
+        Console.WriteLine("This is an extension method");
     }
 }
